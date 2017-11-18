@@ -2,7 +2,7 @@ class Api::V1::ProductsController < ApplicationController
   before_action :authenticate_user!, except: [ :index ]
   
     def index
-      @user = User.find(params[:id])
+      @user = User.find(params[:user_id])
       @products = @user.products
       render json: @products
     end
