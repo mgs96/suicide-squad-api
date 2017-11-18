@@ -12,7 +12,7 @@ class Api::V1::ProductsController < ApplicationController
       render json: @products
     end
     
-    def createg
+    def create
       @user = User.find(product_params[:user_id])
       @product = @user.products.create(product_params.except(:user_id))
       render json: @product
