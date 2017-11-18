@@ -2,7 +2,8 @@ class Api::V1::ProductsController < ApplicationController
   before_action :authenticate_user!, except: [ :index ]
   
     def index
-      @products = Product.all
+      @user = User.find(params[:id])
+      @products = @user.products
       render json: @products
     end
     
@@ -26,6 +27,11 @@ class Api::V1::ProductsController < ApplicationController
     def delete
         @product = Product.find(params[:id])
         @product.destroy
+    end
+    
+    def global
+      @products = Product.all
+      render jsons: @products
     end
     
     private

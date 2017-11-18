@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :users do
         resources :products
       end
+      get "/products", to: "products#global"
     end
   end
 end
