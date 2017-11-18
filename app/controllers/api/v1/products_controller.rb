@@ -1,5 +1,5 @@
 class Api::V1::ProductsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index ]
+  before_action :authenticate_user!, except: [ :index; :global, :last_ten ]
   
     def index
       @user = User.find(params[:user_id])
