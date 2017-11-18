@@ -34,6 +34,11 @@ class Api::V1::ProductsController < ApplicationController
       render jsons: @products
     end
     
+    def last_ten
+      @products = Product.order(created_at: :desc).limit(10)
+      render json: @products
+    end
+    
     private
     def product_params
       params.require(:product).permit(:name, :price, :desc, :rating, :user_id)

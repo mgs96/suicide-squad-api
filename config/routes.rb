@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         resources :products
       end
       get "/products", to: "products#global"
+      get "/products/last_ten", to: "products#last_ten"
     end
   end
 end
