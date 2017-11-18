@@ -11,8 +11,9 @@ class Api::V1::ProductsController < ApplicationController
       render json: @products
     end
     
-    def create
-      @product = Product.create(product_params)
+    def createg
+      @user = User.find(product_params[:user_id])
+      @product = @user.products.create(product_params.except(:user_id))
       render json: @product
     end
     
@@ -29,6 +30,6 @@ class Api::V1::ProductsController < ApplicationController
     
     private
     def product_params
-      params.require(:product).permit(:name, :price, :desc, :rating)
+      params.require(:product).permit(:name, :price, :desc, :rating, :user_id)
     end
 end
