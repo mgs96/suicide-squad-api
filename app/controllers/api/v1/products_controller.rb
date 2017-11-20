@@ -31,7 +31,7 @@ class Api::V1::ProductsController < ApplicationController
     
     def global
       @products = Product.all
-      render jsons: @products
+      render json: @products
     end
     
     def last_ten
