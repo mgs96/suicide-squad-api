@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get "/products", to: "products#global"
       get "/products/last_ten", to: "products#last_ten"
       get "products/by_category", to: "products#by_category"
+      get "/categories", to: "categories#index"
     end
   end
 end

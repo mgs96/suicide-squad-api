@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   has_many :tags
   has_many :categories, through: :tags
   
-  def by_category(category = "")
-    Product.joins(:categories).where('categories.name': category)
+  def self.by_category(category = "")
+    self.joins(:categories).where('categories.name': category)
   end
 end
