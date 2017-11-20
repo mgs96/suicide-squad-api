@@ -39,6 +39,11 @@ class Api::V1::ProductsController < ApplicationController
       render json: @products
     end
     
+    def by_category
+      @products = Product.by_category(params[:category])
+      render json: @products
+    end
+    
     private
     def product_params
       params.require(:product).permit(:name, :price, :desc, :rating, :user_id)
