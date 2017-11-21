@@ -42,8 +42,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'https://back-end-salazarthecoder.c9users.io' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    user_name:      'mauricio.guzman.salazar@gmail.com',
-    password:       '96051006469',
+    user_name:      ENV['USERNAME'],
+    password:       ENV['PASSWORD'],
     domain:         'localhost:3000',
     address:        'smtp.gmail.com',
     port:           '587',
