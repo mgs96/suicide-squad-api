@@ -1,47 +1,46 @@
 class Api::V1::ProductsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index, :global, :last_ten, :by_category ]
+  before_action :authenticate_user!, except: [ :index, :show, :global, :last_ten, :by_category ]
   
     def index
       @user = User.find(params[:user_id])
       @products = @user.products
-      render json: @products
     end
     
     def show
-      @products = Product.find(params[:id])
-      render json: @products
+      @product = Product.find(params[:id])
     end
     
     def create
       @user = User.find(product_params[:user_id])
       @product = @user.products.create(product_params.except(:user_id))
-      render json: @product
+      render 'show'
     end
     
     def update
-       @product = Product.find(params[:id])
-       @product.update_attributes(product_params)
-       render json: @product
+      @product = Product.find(params[:id])
+      @product.update_attributes(product_params)
+      @product.tag.create(category_id: Category.find_by(name: params[:category_name]).id)
+      render 'show'
     end
     
-    def delete
-        @product = Product.find(params[:id])
-        @product.destroy
+    def destroy
+      @product = Product.find(params[:id])
+      @product.destroy
     end
     
     def global
       @products = Product.all
-      render json: @products
+      render 'index'
     end
     
     def last_ten
       @products = Product.order(created_at: :desc).limit(10)
-      render json: @products
+      render 'index'
     end
     
     def by_category
       @products = Product.by_category(params[:category])
-      render json: @products
+      render 'index'
     end
     
     private

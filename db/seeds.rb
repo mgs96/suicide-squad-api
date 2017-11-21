@@ -42,8 +42,8 @@ Category.create(name: "Ropa y Accesorios")
 Category.create(name: "Salud y Belleza")
 Category.create(name: "Otras categorías")
 
-Product.find_by(name: "Camisa para hombre").tags.create(category_id: Category.find_by(name: "Ropa y Accesorios"))
+Product.find_by(name: "Camisa para hombre").tags.create(category_id: Category.find_by(name: "Ropa y Accesorios").id)
 
-Product.find_by(name: "Zapatos para hombre").tags.create(category_id: Category.find_by(name: "Ropa y Accesorios"))
+Product.find_by(name: "Zapatos para hombre").tags.create(category_id: Category.find_by(name: "Ropa y Accesorios").id)
 
-Product.find_by(name: "Zapatos para hombre").tags.create(category_id: Category.find_by(name: "Celulares y Teléfonos"))
+Product.find_by(name: "Google pixel").tags.create(category_id: Category.find_by(name: "Celulares y Teléfonos").id)
