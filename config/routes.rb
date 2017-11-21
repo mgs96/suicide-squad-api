@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   namespace :api,  defaults: { format: 'json' } do
     namespace :v1 do
       resources :users, except: :create do
-        resources :products
+        resources :products do
+          resources :comments
+        end
       end
       get "/products", to: "products#global"
       get "/products/last_ten", to: "products#last_ten"
