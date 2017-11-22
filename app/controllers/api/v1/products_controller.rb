@@ -12,7 +12,8 @@ class Api::V1::ProductsController < ApplicationController
     
     def create
       @user = User.find(product_params[:user_id])
-      @product = @user.products.create(product_params.except(:user_id))
+      @product = @user.products.create(product_params.except(:user_id, :category_name))
+      @product.tag.create(category_id: Category.find_by(product_params[:category_name]).id)
       render 'show'
     end
     
