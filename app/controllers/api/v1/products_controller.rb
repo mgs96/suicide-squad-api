@@ -13,14 +13,14 @@ class Api::V1::ProductsController < ApplicationController
     def create
       @user = User.find(product_params[:user_id])
       @product = @user.products.create(product_params.except(:user_id, :category_name))
-      @product.tags.create(category_id: Category.find_by(product_params[:category_name]).id)
+      @product.tags.create(category_id: Category.find_by(name: product_params[:category_name]).id)
       render 'show'
     end
     
     def update
       @product = Product.find(params[:id])
       @product.update_attributes(product_params)
-      @product.tags.create(category_id: Category.find_by(product_params[:category_name]).id)
+      @product.tags.create(category_id: Category.find_by(name: product_params[:category_name]).id)
       render 'show'
     end
     
