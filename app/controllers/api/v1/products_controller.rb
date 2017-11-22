@@ -19,7 +19,7 @@ class Api::V1::ProductsController < ApplicationController
     def update
       @product = Product.find(params[:id])
       @product.update_attributes(product_params)
-      @product.tag.create(category_id: Category.find_by(name: params[:category_name]).id)
+      @product.tag.create(category_id: Category.find_by(product_params[:category_name]).id)
       render 'show'
     end
     
@@ -45,6 +45,6 @@ class Api::V1::ProductsController < ApplicationController
     
     private
     def product_params
-      params.require(:product).permit(:name, :price, :desc, :rating, :user_id, :image)
+      params.require(:product).permit(:name, :price, :desc, :rating, :user_id, :image, :category_name)
     end
 end
