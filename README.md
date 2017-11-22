@@ -1,7 +1,6 @@
 # README
 
-The idea of this project is to serve as an API seed project, I will add further
-info... later
+### Set up
 
 if you're using [c9.io](https://c9.io/) and you want to upload it to heroku,
 chances are you have a legacy version of  heroku-cli, to solve this, copy-paste 
@@ -68,3 +67,96 @@ Now switch to template1 and VACUUM FREEZE the template:
 `\c template1`  
 `VACUUM FREEZE;`  
 Problem should be resolved.
+
+To fill the database with data, run `rails db:seed`.
+The seed data contains two users, three products with their category (as tags)
+and twenty three categories, the credentials for the two users are:
+
+email: el@admin.com 
+password: 123456789
+
+email: el@user.com 
+password: 123456789
+
+### API usage
+
+All routes are prefixed with `/api/v1` except for the authentication routes,
+the routes that require authentication need to be provided with the `uid`, 
+`acces-token` and `client` headers.
+
+# Authentication
+
+## POST /auth/sign_in
+
+Authenticates a user, requires `email` and `password` as params, returns the
+headers needed in the authenticated routes
+
+## DELETE /auth/sign_out
+
+Ends the user's current session, requies authentication headers
+
+## POST /auth
+
+Creates a user, requires `email`, `password` and `password_confirmation` params, 
+you can send a `confirm_success_url` to redirect the user to after the
+confirmation link is pressed, this route will return the user as it was saved in
+the database
+
+# Products
+
+## GET /products
+
+returns all the products
+
+## GET /products/last_ten
+
+returns the last ten created products
+
+## GET /products/by_category
+
+returns all the products from one category, requires `category` param
+
+## GET /users/:user_id/products
+
+returns all the products from a user
+
+## POST /users/:user_id/products
+
+requires authentication, creates a product, requires `name`, `price`, `desc`, 
+`rating`, `user_id`, `image` and `category_name`, returns the product with its id
+
+## GET /users/:user_id/products/:id
+
+returns a product from a user
+
+## PATCH  /users/:user_id/products/:id
+
+requires authentication, updates a product, requires the same params as post
+
+## DELETE /users/:user_id/products/:id
+
+requires authentication, deletes a product
+
+# Users
+
+## GET /users
+
+returns all the users
+
+## GET /users/:id
+
+returns a single user
+
+## PATCH  /users/:id
+
+updates a user, requires `name` param
+
+## DELETE /users/:id
+
+requires authentication, deletes a user, only an admin can delete it
+
+# Categories
+
+## GET /categories
+
+returns all the categories
